@@ -1,0 +1,25 @@
+body {
+    background-color:  #fdf1d3;
+}
+
+h1{
+    color: blue;
+}
+
+#stan {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fit, 300px);
+    gap: 20px;
+    margin: 20px;
+}
+
+#stan div{
+    background-color: white;
+}
+
+#stan img {
+    width: 300px;
+    padding: 20px;
+    box-sizing: border-box;
+}
