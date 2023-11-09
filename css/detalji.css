@@ -4,7 +4,6 @@ body {
 }
 
 #osnovno img {
-    width: 50%;
     margin-bottom: 10px;
 }
 
@@ -14,4 +13,12 @@ h3 {
 
 p {
     margin-bottom: 40px;
+}
+
+td {
+    padding-bottom: 40px;
+}
+
+#opis{
+    padding: 0;
 }
