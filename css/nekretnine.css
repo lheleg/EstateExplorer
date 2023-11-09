@@ -1,12 +1,15 @@
 body {
     background-color:  #fdf1d3;
+    margin: 0;
 }
 
 h1{
+    display: flex;
+    justify-content: center;
     color: blue;
 }
 
-#stan {
+#stan, #kuca, #pp {
     display: grid;
     justify-content: space-between;
     grid-template-columns: repeat(auto-fit, 300px);
@@ -18,8 +21,64 @@ h1{
     background-color: white;
 }
 
-#stan img {
+#kuca div{
+    background-color: powderblue;
+}
+
+#pp div{
+    background-color: green;
+}
+
+
+img {
     width: 300px;
-    padding: 20px;
+    height: 230px;
+    padding: 10px;
     box-sizing: border-box;
+}
+
+p {
+    padding: 0 10px;
+    margin: 0;
+}
+
+#cijena {
+    text-align: right;
+}
+
+button {
+    width: 300px;
+    margin-top: 10px;
+    padding: 5px 0;
+    font-size: large;
+    font-weight: bold;
+    color: blue;
+    border-width: 0;
+}
+
+#stan button {
+    background-color: white;
+}
+
+#kuca button {
+    background-color: powderblue;
+}
+
+#pp button {
+    background-color: green;
+}
+
+#stan button:hover {
+    background-color: blue;
+    color:white;
+}
+
+#kuca button:hover {
+    background-color: blue;
+    color:powderblue;
+}
+
+#pp button:hover {
+    background-color: blue;
+    color:green;
 }
