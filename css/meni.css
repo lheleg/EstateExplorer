@@ -1,14 +1,15 @@
 body {
     background-color:  #fdf1d3;
-    margin: 30px 0;
+    overflow: hidden;
+    margin: 30px;
 }
 
 #menu {
     position: fixed;
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 100%;
+    margin-bottom: 100px;
 }
 
 #menu ul {
@@ -32,8 +33,13 @@ body {
     color: #ff9900; 
 }
 
-iframe {
+#okvir {
+    margin-bottom: 150px;
+}
+
+#okvir iframe {
     margin-top: 80px;
     width: 100%;
-    border:none;
+    height: 80vh;
+    border: none;
 }
