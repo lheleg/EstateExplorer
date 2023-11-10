@@ -1,0 +1,21 @@
+body {
+    background-color:  #fdf1d3;
+    padding: 20px;
+    margin: 0;
+}
+
+img {
+    width: 150px;
+    border-radius: 3px;
+}
+
+label {
+    padding-bottom: 50px;
+}
+
+input {
+    padding: 10px;
+    margin: 20px;
+    border: none;
+}
+
