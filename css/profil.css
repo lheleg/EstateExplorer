@@ -5,21 +5,55 @@ body {
     margin: 0;
 }
 
-img {
-    width: 150px;
-    border-radius: 3px;
-    margin-bottom: 20px;
+table tbody{
+    margin: -50px 0;
+    display: block;
+    border-spacing: 0 30px;
 }
 
-label {
-    padding-bottom: 50px;
+td {
+    padding-right: 100px;
+    padding-left: 20px; 
+}
+
+img {
+    width: 300px;
+    border-radius: 3px;
+    margin-top: 30px;
 }
 
 input {
     padding: 10px;
-    margin: 20px;
     width: 150px;
     font-size: medium;
     border: none;
 }
 
+#slika-left {
+    padding: 0;
+    vertical-align: top;
+}
+
+#slika-top {
+    display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  #slika-top {
+    display:contents;
+  }
+  #slika-left {
+    display:none;
+  }
+  img {
+    width: 150px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+  table tbody{
+    border-spacing: 0 20px;
+  }
+  td {
+    padding-left: 0;
+  }
+}

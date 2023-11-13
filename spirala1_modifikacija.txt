@@ -1,0 +1,6 @@
+Kako je za kompletnu realizaciju koristen table tag, uradjene su modifikacije istog.
+One se u ogledaju u tome da je dodan jos jedan td tag s img tagom, nad kojem su vrsene modifikacije da bi se postigao izgled sa zadane slike stranice.
+Ono sto je bilo kljucno jeste dodati argument rowspan kako bi se slika premjestila na lijevu stranu.
+
+Koristeci display:none; i display:contents;, te media-query postignuto je da se slika prikazuje odnosno ne prikazuje na stranici na uredjajima s odredjenom sirinom.
+Takodjer, doslo je do promjene margin, padding, display i slicnih properties kako bi se postigao izgled sa zadanih slika stranica.
