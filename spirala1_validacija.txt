@@ -1,0 +1,5 @@
+Korišteni validatori: The W3C Markup Validation Service, Nu Html Checker, The W3C CSS Validation Service, CSS Portal CSS Validator.
+
+u detalji.html zatvoren img tag
+u nekretnine.html koristen id umjesto class
+u profil.html fali alt atrbut kod img taga
