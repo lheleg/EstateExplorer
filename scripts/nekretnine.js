@@ -26,6 +26,7 @@ function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
 
         var cijenaSpan = document.createElement('span');
         cijenaSpan.textContent = nekretnina.cijena + " BAM";
+        cijenaSpan.classList.add('cijena');
         iDiv.appendChild(cijenaSpan);
 
         var detaljiDugme = document.createElement('button');
