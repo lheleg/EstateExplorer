@@ -4,9 +4,9 @@ let SpisakNekretnina = function () {
     let listaKorisnika = [];
 
     //implementacija metoda
-    let init = function (listaNekretnina, listaKorisnika) {
-        this.listaNekretnina = listaNekretnina;
-        this.listaKorisnika = listaKorisnika;
+    let init = function (nekretnine, korisnici) {
+        listaNekretnina = nekretnine;
+        listaKorisnika = korisnici;
     }
 
     let filtrirajNekretnine = function (kriterij) {
@@ -17,7 +17,7 @@ let SpisakNekretnina = function () {
 
         //Filtriranje na osnovu kriterija
         return listaNekretnina.filter(nekretnina => {
-            if (kriterij.tip_nekretnine && nekretnina.tip_nekretnine !== kriterij.tip_nekretnine) {
+            if (kriterij.tip_nekretnine && nekretnina.tip_nekretnine != kriterij.tip_nekretnine) {
                 return false;
             }
             if (kriterij.min_kvadratura && nekretnina.kvadratura < kriterij.min_kvadratura) {
@@ -38,9 +38,9 @@ let SpisakNekretnina = function () {
 
     let ucitajDetaljeNekretnine = function (id) {
         const nadjenaNekretnina = listaNekretnina.find(nekretnina => nekretnina.id === id);
-    return nadjenaNekretnina || null;
+        return nadjenaNekretnina || null;
     }
-    
+
     return {
     init: init,
     filtrirajNekretnine: filtrirajNekretnine,
@@ -48,6 +48,7 @@ let SpisakNekretnina = function () {
     }
 };
 
+/*
 const listaNekretnina = [{
     id: 1,
     tip_nekretnine: "Stan",
@@ -99,9 +100,6 @@ const listaKorisnika = [{
     username: "username2",
 }]
 
-let spisak = SpisakNekretnina();
-spisak.init(listaNekretnina,listaKorisnika);
-
 //primjer 1
 const kriterij1 = {
 tip_nekretnine: "Stan",
@@ -119,6 +117,6 @@ const kriterij3 = {
     tip_nekretnine: "Poslovni prostor",
     min_kvadratura: 25,
     max_cijena: 180000
-}
+}*/
     
-const filteredNekretnine = spisak.filtrirajNekretnine(kriterij1);
+
