@@ -9,11 +9,7 @@ h1{
     color: blue;
 }
 
-div {
-    width: 300px;
-    padding: 10px;
-    box-sizing: border-box;
-}
+
 
 #stan, #kuca, #pp {
     display: grid;
@@ -55,7 +51,7 @@ p {
 }
 
 button {
-    width: 280px;
+    width: 300px;
     margin-top: 10px;
     padding: 5px 0;
     font-size: large;

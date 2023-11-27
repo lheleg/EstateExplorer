@@ -6,28 +6,30 @@ function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
         var iDiv = document.createElement('div');
 
         var imgElement = document.createElement('img');
-        imgElement.src = nekretnina.imageUrl; 
+        imgElement.src = "https://q-xx.bstatic.com/xdata/images/hotel/840x460/380346834.jpg?k=4d9843d659ff9390e7345f5e458849da094929f157ac5df1bc0dc64b9a84d5c5&o="; 
         imgElement.alt = 'Foto'; 
         iDiv.appendChild(imgElement);
 
         iDiv.appendChild(document.createElement('br'));
 
-        var naziv = document.createTextNode(nekretnina.naziv);
-        iDiv.appendChild(naziv);
+        var nazivPar = document.createElement('p');
+        var pomocna = document.createTextNode(nekretnina.naziv);
+        nazivPar.appendChild(pomocna);
+        iDiv.appendChild(nazivPar);
 
         iDiv.appendChild(document.createElement('br'));
 
-        var kvadraturaSpan = document.createElement('span');
-        var kvadratura = document.createTextNode(nekretnina.kvadratura + " m2");
-        kvadraturaSpan.appendChild(kvadratura);
-        iDiv.appendChild(kvadraturaSpan);
+        var kvadraturaPar = document.createElement('p');
+        pomocna = document.createTextNode(nekretnina.kvadratura + " m2");
+        kvadraturaPar.appendChild(pomocna);
+        iDiv.appendChild(kvadraturaPar);
 
         iDiv.appendChild(document.createElement('br'));
 
-        var cijenaSpan = document.createElement('span');
-        cijenaSpan.textContent = nekretnina.cijena + " BAM";
-        cijenaSpan.classList.add('cijena');
-        iDiv.appendChild(cijenaSpan);
+        var cijenaPar = document.createElement('p');
+        cijenaPar.textContent = nekretnina.cijena + " BAM";
+        cijenaPar.classList.add('cijena');
+        iDiv.appendChild(cijenaPar);
 
         var detaljiDugme = document.createElement('button');
         detaljiDugme.innerText = 'Detalji';
