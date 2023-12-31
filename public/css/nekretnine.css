@@ -9,8 +9,6 @@ h1{
     color: blue;
 }
 
-
-
 #stan, #kuca, #pp {
     display: grid;
     justify-content: space-between;
