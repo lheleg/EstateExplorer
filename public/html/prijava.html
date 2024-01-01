@@ -7,14 +7,14 @@
         <META name="viewport" content="width=device-width, initial-scale=1.0">
     </HEAD>
     <BODY>
-        <form action="" method="post">
+        <form action="/login" method="post">
             <label for="username">Username: </label>
-            <input type="text" placeholder="Input Field" id="username" name="username">
+            <input type="text" placeholder="Enter your username" id="username" name="username" required>
             <br><br>
             <label for="password">Password: </label>
-            <input type="text" placeholder="Input Field" id="password" name="password">
+            <input type="password" placeholder="Enter your password" id="password" name="password" required>
             <br><br>
-            <input type="submit" value="Prijava">
+            <input id="prijavaDugme" type="submit" value="Prijava">
         </form>
     </BODY>
 </HTML>

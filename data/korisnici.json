@@ -4,14 +4,14 @@
         "ime": "Neko",
         "prezime": "Nekic",
         "username": "username1",
-        "password": "hashPassworda1"
+        "password": "$2a$12$5PXeijUS9X8pbLeIa4LG3OzBA7SF6Zl34/EtAZVc3u2g2cMy5Fbqq"
     },
     {
         "id": 2,
         "ime": "Neko2",
         "prezime": "Nekic2",
         "username": "username2",
-        "password": "hashPassworda2"
+        "password": "$2a$12$JfpYBCeCXVLbDgG5leCv3OUDOYVLKz7PrL2DzHUs09KR/7BOC/N/i"
     }
 ]
     
