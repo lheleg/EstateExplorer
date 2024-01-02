@@ -76,7 +76,7 @@ app.post('/logout', autorizovano, (req, res) => {
     });
 });
 
-// Korisnik ruta
+// Korisnik ruta (get)
 app.get('/korisnik', autorizovano, (req, res) => {  
     const korisnik = korisniciData.find(k => k.username === req.session.username);
     
@@ -122,23 +122,45 @@ app.post('/upit', autorizovano, (req, res) => {
             res.status(200).json({ poruka: 'Upit je uspješno dodan' });
         }
     });
-
-    fs.readFile('data/nekretnine.json', 'utf-8', (err, data) => {
-        if (err) {
-            console.error('Greška pri čitanju:', err);
-        } else {
-            nekretnineData = JSON.parse(data);
-        }
-    });
-
 })
 
-/* Korisnik rutu
-app.put('/korisnik', (req, res) => {
+// Korisnik ruta (put)
+app.put('/korisnik', autorizovano, (req, res) => {
     const { ime, prezime, username, password } = req.body;
 
-    
-})*/
+    const korisnik = korisniciData.find(k => k.username === req.session.username);
+
+    if (korisnik) {
+        if (ime) korisnik.ime = ime;
+        if (prezime) korisnik.prezime = prezime;
+        if (username) korisnik.username = username;
+        if (password) {
+            bcrypt.hash(pass, 10, function(err, hash) {
+                if (err){
+                    res.status(401).json({ greska: 'Greška pri hashiranju' });
+                } else{
+                    korisnik.password = hash;
+                }
+            });
+        }
+
+        fs.writeFile('data/korisnici.json', JSON.stringify(korisniciData, null, 2), 'utf-8', (err) => {
+            if (err) {
+                console.error('Greška pri upisu korisnici.json:', err);
+                res.status(500).json({ greska: 'Internal Server Error' });
+            } else {
+                res.status(200).json({ poruka: 'Podaci su uspješno ažurirani' });
+            }
+        });
+    } else {
+        res.status(401).json({ greska: 'Neautorizovan pristup' });
+    }
+})
+
+// Nekretnine ruta
+app.get('/nekretnine', (req, res) => {
+    res.status(200).json(nekretnineData);
+})
 
 // Ignore favicon.ico zahtjeve
 //app.get('/favicon.ico', (req, res) => res.status(204));

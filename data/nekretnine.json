@@ -21,11 +21,7 @@
       },
       {
         "id_korisnika": 2,
-        "tekst_upita": "tip top"
-      },
-      {
-        "id_korisnika": 2,
-        "tekst_upita": "tip top"
+        "tekst_upita": "predivno"
       }
     ]
   },
@@ -48,10 +44,6 @@
       {
         "id_korisnika": 2,
         "tekst_upita": "vrh"
-      },
-      {
-        "id_korisnika": 2,
-        "tekst_upita": "predivno"
       }
     ]
   }

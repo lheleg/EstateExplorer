@@ -45,3 +45,11 @@ body {
     border: none;
     box-sizing: border-box;
 }
+
+#profilA {
+    display: none;
+}
+
+#odjavaA {
+    display: none;
+}
