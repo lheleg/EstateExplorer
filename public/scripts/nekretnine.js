@@ -43,22 +43,58 @@ const divStan = document.getElementById("stan");
 const divKuca = document.getElementById("kuca");
 const divPp = document.getElementById("pp");
 
+//instanciranje modula
+let nekretnine = SpisakNekretnina();
+let sveNekretnine;
+
 PoziviAjax.getNekretnine((error, listaNekretnina) => {
     if (error) {
         console.error('Greška prilikom dobavljanja nekretnina:', error);
         return;
     }
     
-    //instanciranje modula
-    let nekretnine = SpisakNekretnina();
     nekretnine.init(listaNekretnina);
-
+    sveNekretnine = listaNekretnina;
     //pozivanje funkcije
     spojiNekretnine(divStan, nekretnine, "Stan");
     spojiNekretnine(divKuca, nekretnine, "Kuća");
     spojiNekretnine(divPp, nekretnine, "Poslovni prostor");
 })
 
+document.addEventListener('DOMContentLoaded', function () {
+    var searchButton = document.getElementById('searchButton');
 
+    if (searchButton) {
+        searchButton.addEventListener('click', function () {
+            const minCijena = document.getElementById('minPrice').value;
+            const maxCijena = document.getElementById('maxPrice').value;
+            const minKvadratura = document.getElementById('minArea').value;
+            const maxKvadratura = document.getElementById('maxArea').value;
+
+            nekretnine.init(sveNekretnine);
+
+            //instanciranje modula
+            let listaNek = nekretnine.filtrirajNekretnine({ min_cijena : minCijena, max_cijena : maxCijena, min_kvadratura : minKvadratura, max_kvadratura : maxKvadratura });
+
+            nekretnine.init(listaNek);
+            
+            // ukloni sadrzaj
+            ukloniDivSadrzaj(divStan);
+            ukloniDivSadrzaj(divKuca);
+            ukloniDivSadrzaj(divPp);
+
+            //pozivanje funkcije
+            spojiNekretnine(divStan, nekretnine, "Stan");
+            spojiNekretnine(divKuca, nekretnine, "Kuća");
+            spojiNekretnine(divPp, nekretnine, "Poslovni prostor");
+        });
+    }
+
+    function ukloniDivSadrzaj(div) {
+        while (div.firstChild) {
+            div.removeChild(div.firstChild);
+        }
+    }
+});
 
 
