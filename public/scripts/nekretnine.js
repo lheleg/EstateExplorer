@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ukloniDivSadrzaj(divStan);
             ukloniDivSadrzaj(divKuca);
             ukloniDivSadrzaj(divPp);
-
+            MarketingAjax.novoFiltriranje(listaNek);
             //pozivanje funkcije
             spojiNekretnine(divStan, nekretnine, "Stan");
             spojiNekretnine(divKuca, nekretnine, "Kuća");

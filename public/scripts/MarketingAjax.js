@@ -75,9 +75,32 @@ const MarketingAjax = (() => {
                 console.error('Error:', error);
             });
     }
+
+    function impl_novoFiltriranje(listaFiltriranihNekretnina) {
+        nekretnineIds = [];
+        listaFiltriranihNekretnina.forEach(nekretnina => {
+            nekretnineIds.push(nekretnina.id);
+        });
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nizNekretnina: nekretnineIds }),
+        };
+
+        filtriranje = true;
+
+        fetch('http://localhost:3000/marketing/nekretnine', requestOptions)
+            .then(response => {
+                return response.status;
+            });
+    }
     return {
         osvjeziPretrage : impl_osvjeziPretrage,
-        osvjeziKlikove : impl_osvjeziKlikove
+        osvjeziKlikove : impl_osvjeziKlikove,
+        novoFiltriranje : impl_novoFiltriranje
     };
 })();
     
