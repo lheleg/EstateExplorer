@@ -4,6 +4,7 @@ function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
     // iscrtavanje elemenata u divReferenca element
     nekretnineLista.forEach(nekretnina => {
         var iDiv = document.createElement('div');
+        iDiv.id = nekretnina.id;
 
         var imgElement = document.createElement('img');
         imgElement.src = "https://q-xx.bstatic.com/xdata/images/hotel/840x460/380346834.jpg?k=4d9843d659ff9390e7345f5e458849da094929f157ac5df1bc0dc64b9a84d5c5&o="; 
@@ -31,12 +32,23 @@ function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
         cijenaPar.classList.add('cijena');
         iDiv.appendChild(cijenaPar);
 
+        var pretrageDiv = document.createElement('div');
+        pretrageDiv.id = 'pretrage-' + nekretnina.id;
+        pretrageDiv.style.padding = '10px';
+        iDiv.appendChild(pretrageDiv);
+
+        var klikoviDiv = document.createElement('div');
+        klikoviDiv.id = 'klikovi-' + nekretnina.id;
+        klikoviDiv.style.padding = '10px';
+        iDiv.appendChild(klikoviDiv);
+
         var detaljiDugme = document.createElement('button');
         detaljiDugme.innerText = 'Detalji';
         iDiv.appendChild(detaljiDugme);
 
         divReferenca.appendChild(iDiv);
     });
+    MarketingAjax.osvjeziKlikove(divReferenca);
 }
 
 const divStan = document.getElementById("stan");
