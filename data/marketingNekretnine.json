@@ -1,12 +1,12 @@
 [
   {
     "nekretnina_id": 1,
-    "broj_pretraga": 9,
-    "broj_klikova": 4
+    "broj_pretraga": 20,
+    "broj_klikova": 6
   },
   {
     "nekretnina_id": 2,
-    "broj_pretraga": 9,
-    "broj_klikova": 3
+    "broj_pretraga": 14,
+    "broj_klikova": 2
   }
 ]

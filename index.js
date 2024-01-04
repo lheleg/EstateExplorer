@@ -236,7 +236,7 @@ app.post('/marketing/osvjezi', (req, res) => {
 
     nekretnineIds.forEach(id => {
         const nekretnina = marketingNekretnine.find(m => m.nekretnina_id === id);
-        const promNek = prethodnoPromijenjeneNekretnine.find(p => p.nekretnina_id ===id)
+        const promNek = prethodnoPromijenjeneNekretnine.find(p => p.nekretnina_id === id)
         if (nekretnina) {
             if (!req.session.nizNekretnina.includes(nekretnina.nekretnina_id)) {
                 promijenjeneNekretnine.push({

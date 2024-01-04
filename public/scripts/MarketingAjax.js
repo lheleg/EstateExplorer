@@ -51,7 +51,7 @@ const MarketingAjax = (() => {
         if (filtriranje) {
             requestOptions.body = JSON.stringify({ nizNekretnina: nekretnineIds }); 
         }
-
+        filtriranje = false;
         fetch('http://localhost:3000/marketing/osvjezi', requestOptions)
             .then(response => {
                 if (!response.ok) {
@@ -97,10 +97,25 @@ const MarketingAjax = (() => {
                 return response.status;
             });
     }
+
+    function impl_klikNekretnina(idNekretnine) {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+    
+        fetch(`http://localhost:3000/marketing/nekretnina/${idNekretnine}`, requestOptions)
+            .then(response => {
+                return response.status;
+            });
+    }
     return {
         osvjeziPretrage : impl_osvjeziPretrage,
         osvjeziKlikove : impl_osvjeziKlikove,
-        novoFiltriranje : impl_novoFiltriranje
+        novoFiltriranje : impl_novoFiltriranje,
+        klikNekretnina : impl_klikNekretnina
     };
 })();
     
