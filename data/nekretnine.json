@@ -44,6 +44,10 @@
       {
         "id_korisnika": 2,
         "tekst_upita": "vrh"
+      },
+      {
+        "id_korisnika": 1,
+        "tekst_upita": "bravo"
       }
     ]
   }

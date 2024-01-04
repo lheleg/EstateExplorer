@@ -4,7 +4,9 @@ const PoziviAjax = (() => {
         fetch(`http://localhost:3000/korisnik`)
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Status: ${response.status}`);
+                return response.json().then(errorData => {
+                    throw new Error(errorData.greska);
+                });
             }
             return response.json();
         })
@@ -22,7 +24,9 @@ const PoziviAjax = (() => {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Status: ${response.status}`);
+                return response.json().then(errorData => {
+                    throw new Error(errorData.greska);
+                });
             }
             return response.json();
         })
@@ -40,7 +44,9 @@ const PoziviAjax = (() => {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Status: ${response.status}`);
+                return response.json().then(errorData => {
+                    throw new Error(errorData.greska);
+                });
             }
             return response.json();
         })
@@ -53,7 +59,9 @@ const PoziviAjax = (() => {
         fetch(`http://localhost:3000/nekretnine`)
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Status: ${response.status}`);
+                return response.json().then(errorData => {
+                    throw new Error(errorData.greska);
+                });
             }
             return response.json();
         })
@@ -71,7 +79,9 @@ const PoziviAjax = (() => {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Status: ${response.status}`);
+                return response.json().then(errorData => {
+                    throw new Error(errorData.greska);
+                });
             }
             return response.json();
         })
@@ -85,7 +95,9 @@ const PoziviAjax = (() => {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Status: ${response.status}`);
+                return response.json().then(errorData => {
+                    throw new Error(errorData.greska);
+                });
             }
             return response.json();
         })

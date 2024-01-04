@@ -135,10 +135,10 @@ app.put('/korisnik', autorizovano, (req, res) => {
         if (prezime) korisnik.prezime = prezime;
         if (username) korisnik.username = username;
         if (password) {
-            bcrypt.hash(pass, 10, function(err, hash) {
+            bcrypt.hash(password, 10, function(err, hash) {
                 if (err){
-                    res.status(401).json({ greska: 'Greška pri hashiranju' });
-                } else{
+                    res.status(500).json({ greska: 'Greška pri hashiranju' });
+                }else {
                     korisnik.password = hash;
                 }
             });
@@ -161,9 +161,6 @@ app.put('/korisnik', autorizovano, (req, res) => {
 app.get('/nekretnine', (req, res) => {
     res.status(200).json(nekretnineData);
 })
-
-// Ignore favicon.ico zahtjeve
-//app.get('/favicon.ico', (req, res) => res.status(204));
 
 // dio za ucitavanje stranica
 app.use(express.static(path.join(__dirname, 'public')));
