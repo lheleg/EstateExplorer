@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ukloniDivSadrzaj(divKuca);
             ukloniDivSadrzaj(divPp);
             MarketingAjax.novoFiltriranje(listaNek);
-
+            
             //pozivanje funkcije
             spojiNekretnine(divStan, nekretnine, "Stan");
             spojiNekretnine(divKuca, nekretnine, "Kuća");
@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function periodicnoPozivanje(divNekretnine) {
     setInterval(() => {
         MarketingAjax.osvjeziPretrage(divNekretnine);
+        MarketingAjax.osvjeziKlikove(divNekretnine);
     }, 500);
 
     setInterval(() => {
