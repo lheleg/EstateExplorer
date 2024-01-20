@@ -18,16 +18,6 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-var marketingNekretnine = null
-
-fs.readFile('data/marketingNekretnine.json', 'utf-8', (err, data) => {
-    if (err) {
-        console.error('Greška pri čitanju:', err);
-    } else {
-        marketingNekretnine = JSON.parse(data);
-    }
-});
-
 const autorizovano = (req, res, next) => {
     if (req.session && req.session.username) {
         next();
@@ -186,100 +176,89 @@ app.get('/nekretnine', (req, res) => {
 });
 
 // Marketing nekretnine
-app.post('/marketing/nekretnine',  (req, res) => {
+app.post('/marketing/nekretnine', (req, res) => {
     const { nizNekretnina } = req.body;
-    nizNekretnina.forEach(id => {
-        var nekretnina = marketingNekretnine.find(m => m.nekretnina_id === id);
-        if(nekretnina){
-            nekretnina.broj_pretraga = nekretnina.broj_pretraga + 1;
-        } else {
-            const novaNekretnina = { nekretnina_id : id, broj_pretraga : 1, broj_klikova : 0 };
-            marketingNekretnine.push(novaNekretnina);
+
+    db.nekretnina.findAll({
+        where: {
+            id: nizNekretnina
         }
-    });
-    
-    fs.writeFile('data/marketingNekretnine.json', JSON.stringify(marketingNekretnine, null, 2), 'utf-8', (err) => {
-        if (err) {
-            console.error('Greška pri upisu marketingNekretnine.json:', err);
-            res.status(500).json({ greska: 'Internal Server Error' });
-        } else {
-            fs.readFile('data/marketingNekretnine.json', 'utf-8', (err, data) => {
-                if (err) {
-                    console.error('Greška pri čitanju:', err);
-                } else {
-                    marketingNekretnine = JSON.parse(data);
-                }
+    }).then((nekretnine) => {
+        nekretnine.forEach((nekretnina) => {
+            nekretnina.update({
+                broj_pretraga: nekretnina.broj_pretraga + 1
             });
-            res.status(200).send();
-        }
+        });
+        return Promise.all(nekretnine.map((nekretnina) => nekretnina.save()));
+    }).then(() => {
+        res.status(200).send();
+    }).catch((error) => {
+        console.error('Greška:', error);
+        res.status(500).json({ greska: 'Internal Server Error' });
     });
 });
 
 // Marketing nekretnina :id
-app.post('/marketing/nekretnina/:id',  (req, res) => {
-    const id = +req.params.id; 
-    var nekretnina = marketingNekretnine.find(m => m.nekretnina_id === id);
-    if(nekretnina){
-        nekretnina.broj_klikova = nekretnina.broj_klikova + 1;
-    } else {
-        const novaNekretnina = { nekretnina_id : id, broj_pretraga : 0, broj_klikova : 1 };
-        marketingNekretnine.push(novaNekretnina);
-    }
+app.post('/marketing/nekretnina/:id', (req, res) => {
+    const id = +req.params.id;
 
-    
-    fs.writeFile('data/marketingNekretnine.json', JSON.stringify(marketingNekretnine, null, 2), 'utf-8', (err) => {
-        if (err) {
-            console.error('Greška pri upisu marketingNekretnine.json:', err);
-            res.status(500).json({ greska: 'Internal Server Error' });
-        } else {
-            fs.readFile('data/marketingNekretnine.json', 'utf-8', (err, data) => {
-                if (err) {
-                    console.error('Greška pri čitanju:', err);
-                } else {
-                    marketingNekretnine = JSON.parse(data);
-                }
+    db.nekretnina.findByPk(id).then((nekretnina) => {
+        if (nekretnina) {
+            nekretnina.update({
+                broj_klikova: nekretnina.broj_klikova + 1
             });
-            res.status(200).send();
-        }
+
+            return nekretnina.save();
+        } 
+    }).then(() => {
+        res.status(200).send();
+    }).catch((error) => {
+        console.error('Greška:', error);
+        res.status(500).json({ greska: 'Internal Server Error' });
     });
 });
 
 const prethodnoPromijenjeneNekretnine = [];
 app.post('/marketing/osvjezi', (req, res) => {
     const { nizNekretnina } = req.body;
-    if(!Array.isArray(req.session.nizNekretnina)) req.session.nizNekretnina = [];
-    const nekretnineIds = nizNekretnina || (req.session.nizNekretnina);
-
+    if (!Array.isArray(req.session.nizNekretnina)) req.session.nizNekretnina = [];
+    const nekretnineIds = nizNekretnina || req.session.nizNekretnina;
     const promijenjeneNekretnine = [];
 
-    nekretnineIds.forEach(id => {
-        const nekretnina = marketingNekretnine.find(m => m.nekretnina_id === id);
-        const promNek = prethodnoPromijenjeneNekretnine.find(p => p.nekretnina_id === id)
-        if (nekretnina) {
-            if (!req.session.nizNekretnina.includes(nekretnina.nekretnina_id)) {
+    db.nekretnina.findAll({
+        where: {
+            id: nekretnineIds
+        }
+    }).then((nekretnine) => {
+        nekretnine.forEach((nekretnina) => {
+            const promNek = prethodnoPromijenjeneNekretnine.find(p => p.nekretnina_id === nekretnina.id);
+            if (!req.session.nizNekretnina.includes(nekretnina.id)) {
                 promijenjeneNekretnine.push({
-                    nekretnina_id: nekretnina.nekretnina_id,
+                    nekretnina_id: nekretnina.id,
                     broj_pretraga: nekretnina.broj_pretraga,
                     broj_klikova: nekretnina.broj_klikova
                 });
-            } else if (promNek && (promNek.broj_klikova != nekretnina.broj_klikova || promNek.broj_pretraga != nekretnina.broj_pretraga)) {
+            } else if (promNek && (promNek.broj_klikova !== nekretnina.broj_klikova || promNek.broj_pretraga !== nekretnina.broj_pretraga)) {
                 promijenjeneNekretnine.push({
-                    nekretnina_id: nekretnina.nekretnina_id,
+                    nekretnina_id: nekretnina.id,
                     broj_pretraga: nekretnina.broj_pretraga,
-                    broj_klikova: nekretnina.broj_klikova                 
+                    broj_klikova: nekretnina.broj_klikova
                 });
             }
+        });
+
+        if (promijenjeneNekretnine.length > 0) {
+            prethodnoPromijenjeneNekretnine.length = 0;
+            Array.prototype.push.apply(prethodnoPromijenjeneNekretnine, promijenjeneNekretnine);
         }
+
+        req.session.nizNekretnina = nekretnineIds;
+
+        res.status(200).json({ nizNekretnina: promijenjeneNekretnine });
+    }).catch((error) => {
+        console.error('Greška:', error);
+        res.status(500).json({ greska: 'Internal Server Error' });
     });
-
-    if (promijenjeneNekretnine.length > 0) {
-        prethodnoPromijenjeneNekretnine.length = 0;
-        Array.prototype.push.apply(prethodnoPromijenjeneNekretnine, promijenjeneNekretnine);
-    }
-
-    req.session.nizNekretnina = nekretnineIds;
-
-    res.status(200).json({ nizNekretnina: promijenjeneNekretnine });
 });
 
 // dio za ucitavanje stranica

@@ -9,8 +9,10 @@ module.exports = function(sequelize,DataTypes){
         tip_grijanja:Sequelize.STRING,
         lokacija:Sequelize.STRING,
         godina_izgradnje:Sequelize.INTEGER,
-        datum_objave:Sequelize.DATE,
-        opis:Sequelize.STRING
+        datum_objave:Sequelize.STRING,
+        opis:Sequelize.STRING,
+        broj_klikova:Sequelize.INTEGER,
+        broj_pretraga:Sequelize.INTEGER
     })
     return Nekretnina;
 };

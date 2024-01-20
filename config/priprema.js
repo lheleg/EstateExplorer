@@ -57,6 +57,8 @@ function inicializacija() {
                 lokacija: "Novo Sarajevo",
                 godina_izgradnje: 2019,
                 datum_objave: "01.10.2023.",
+                broj_pretraga: 0,
+                broj_klikova: 0,
                 opis: "Sociis natoque penatibus."}).then(function(k){
                     return k.setUpitiNekretnine([upit1,upit2,upit4]).then(function(){
                         return new Promise(function(resolve,reject){resolve(k);});
@@ -72,6 +74,8 @@ function inicializacija() {
                 lokacija: "Centar",
                 godina_izgradnje: 2005,
                 datum_objave: "20.08.2023.",
+                broj_pretraga: 0,
+                broj_klikova: 0,
                 opis: "Magnis dis parturient montes."}).then(function(k){
                     return k.setUpitiNekretnine([upit3]).then(function(){
                         return new Promise(function(resolve,reject){resolve(k);});
