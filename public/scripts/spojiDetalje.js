@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('opis').innerHTML = `<b>Opis:</b> ${nekretnina.opis}`;  
             
             var ulElement = document.createElement('ul');
+            ulElement.id = 'ul_element'
             nekretnina.upiti.forEach(u => {
                 var liElement = document.createElement('li');
 
