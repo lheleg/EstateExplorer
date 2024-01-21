@@ -105,13 +105,33 @@ const PoziviAjax = (() => {
         .catch(error => fnCallback(error, null));
     }
 
+    function impl_getNekretninaById(nekretnina_id, fnCallback) {
+        fetch(`http://localhost:3000/nekretnina/${nekretnina_id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw new Error(errorData.greska);
+                });
+            }
+            return response.json();
+        })
+        .then(data => fnCallback(null, data))
+        .catch(error => fnCallback(error, null));
+    }
+
     return {
         postLogin: impl_postLogin,
         postLogout: impl_postLogout,
         getKorisnik: impl_getKorisnik,
         putKorisnik: impl_putKorisnik,
         postUpit: impl_postUpit,
-        getNekretnine: impl_getNekretnine
+        getNekretnine: impl_getNekretnine,
+        getNekretnina: impl_getNekretninaById
     };
 })();
     

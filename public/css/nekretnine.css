@@ -15,6 +15,7 @@ h1{
     display: grid;
     justify-content: space-between;
     grid-template-columns: repeat(auto-fit, 300px);
+    height: 400px;
     gap: 20px;
     margin-top: 20px;
     margin-bottom: 50px;
@@ -52,7 +53,7 @@ p {
 
 button {
     width: 300px;
-    margin-top: 10px;
+    margin-top: 50px;
     padding: 5px 0;
     font-size: large;
     font-weight: bold;
@@ -106,3 +107,14 @@ button {
     border: none;
     box-sizing: border-box;
 }
+
+.expanded {
+    width: 500px; 
+    height: 400px;
+}
+
+.expanded button {
+    width: 500px;
+    margin-top: 0px;
+}
+

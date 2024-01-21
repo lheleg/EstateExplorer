@@ -175,6 +175,44 @@ app.get('/nekretnine', (req, res) => {
     });
 });
 
+// Nekretnina po id ruta
+app.get('/nekretnina/:id', (req, res) => {
+    const id = +req.params.id;
+
+    db.nekretnina.findByPk(id, { include: 'upitiNekretnine' }).then((nekretnina) => {
+        if (nekretnina) {
+            const upiti = nekretnina.upitiNekretnine.map(async (upit) => {
+                const korisnik = await db.korisnik.findByPk(upit.KorisnikId);
+                return {
+                    id: upit.id,
+                    tekst_upita: upit.tekst_upita,
+                    korisnik_username: korisnik ? korisnik.username : null
+                };
+            });
+            Promise.all(upiti).then((resolvedUpiti) => {
+                res.status(200).json({
+                    id: nekretnina.id,
+                    tip_nekretnine: nekretnina.tip_nekretnine,
+                    naziv: nekretnina.naziv,
+                    kvadratura: nekretnina.kvadratura,
+                    cijena: nekretnina.cijena,
+                    tip_grijanja: nekretnina.tip_grijanja,
+                    lokacija: nekretnina.lokacija,
+                    godina_izgradnje: nekretnina.godina_izgradnje,
+                    datum_objave: nekretnina.datum_objave,
+                    opis: nekretnina.opis,
+                    upiti: resolvedUpiti
+                });
+            });
+        } else {
+            res.status(400).json({ greska: `Nekretnina sa id-em ${id} ne postoji` });
+        }
+    }).catch((error) => {
+        console.error('Greška:', error);
+        res.status(500).json({ greska: 'Internal Server Error' });
+    });
+});
+
 // Marketing nekretnine
 app.post('/marketing/nekretnine', (req, res) => {
     const { nizNekretnina } = req.body;
